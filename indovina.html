@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gioco degli Indovinelli</title>
+</head>
+
+<body>
+    <h1>Benvenuto al Gioco degli Indovinelli</h1>
+    <p id="indovinello"></p>
+    <input type="text" id="risposta" placeholder="Inserisci la risposta">
+    <button onclick="controllaRisposta()">Controlla Risposta</button>
+    <button onclick="generaIndovinello()">Nuovo Indovinello</button>
+    <p id="risultato"></p>
+
+    <script>
+        // Definisci una biblioteca di indovinelli
+        const indovinelli = [{
+            domanda: "Cos'è alto quanto un uomo e pesa come un'anatra?",
+            risposta: "Un'anatroccolo"
+        }, {
+            domanda: "Cos'è che nel giorno ha 4 zampe e la notte ne ha 8?",
+            risposta: "Il letto"
+        }, {
+            domanda: "Cosa vola senza ali?",
+            risposta: "Il tempo"
+        }];
+
+        let indovinelloCorrente = null;
+
+        function generaIndovinello() {
+            // Scegli un indovinello casuale dalla biblioteca
+            const indiceCasuale = Math.floor(Math.random() * indovinelli.length);
+            indovinelloCorrente = indovinelli[indiceCasuale];
+
+            // Visualizza la domanda dell'indovinello
+            document.getElementById("indovinello").textContent = indovinelloCorrente.domanda;
+            document.getElementById("risultato").textContent = "";
+        }
+
+        function controllaRisposta() {
+            if (!indovinelloCorrente) {
+                alert("Genera un nuovo indovinello prima di controllare la risposta.");
+                return;
+            }
+
+            const rispostaUtente = document.getElementById("risposta").value;
+            if (rispostaUtente.toLowerCase() === indovinelloCorrente.risposta.toLowerCase()) {
+                document.getElementById("risultato").textContent = "Bravo! Hai indovinato la risposta corretta.";
+            } else {
+                document.getElementById("risultato").textContent = "Risposta sbagliata. Prova di nuovo.";
+            }
+        }
+
+        // Genera il primo indovinello all'avvio del gioco
+        generaIndovinello();
+    </script>
+</body>
+
+</html>
